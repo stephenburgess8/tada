@@ -1,24 +1,15 @@
 //Imports
 const express = require ('express')
+const morgan = require('morgan')
 const bodyParser= require('body-parser')
 const dotenv = require('dotenv')
 dotenv.config()
 
 // auth.js
-const passport = require('passport')
-var Strategy = require('passport-http').BasicStrategy;
-passport.use(new Strategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err) }
-      if (!user) { return done(null, false) }
-      if (!user.validPassword(password)) { return done(null, false) }
-      return done(null, user)
-    })
-  }
-))
+
 
 const app = express()
+app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -34,7 +25,11 @@ const client = new MongoClient(uri, {
 
 // routes.js
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    // passport.authenticate('basic', { session: false }),
+    // function(req, res) {
+    //     res.json({ username: req.user.username, email: req.user.emails[0].value })
+    // })
+    res.sendFile(__dirname + '/client/public/index.html')
 })
 
 app.post('/todos', async (req, res, next) => {   
@@ -74,7 +69,7 @@ app.get('/logout',
         res.redirect('/')
 })
 
-
-app.listen(3000, function() {
+const port = process.env.PORT || 3000
+app.listen(port, function() {
     console.log('listening on 3000')
 })
