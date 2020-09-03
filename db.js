@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const db = process.env.DEV_DB
+const uri = `mongodb+srv://${process.env.mongouser}:${process.env.mongopass}@${process.env.mongocluster}.amsqv.mongodb.net/?retryWrites=true&w=majority`
 
 const options = {
 	useNewUrlParser: true,
@@ -12,7 +13,7 @@ const options = {
 }
 
 mongoose
-	.connect(DEV_DB, options)
+	.connect(db, options)
 	.then(() => {
 		console.log("MongoDB is connected")
 	})

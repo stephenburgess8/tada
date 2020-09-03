@@ -2,26 +2,19 @@
 const express = require ('express')
 const morgan = require('morgan')
 const bodyParser= require('body-parser')
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 
 // auth.js
-
+const db = require('./db.js')
+const passport = require('./auth.js')
 
 const app = express()
 app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize())
-app.use(passport.session())
-
-// db.js
-const MongoClient = require('mongodb').MongoClient
-const uri = `mongodb+srv://${process.env.mongouser}:${process.env.mongopass}@${process.env.mongocluster}.amsqv.mongodb.net/?retryWrites=true&w=majority`
-
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+//app.use(passport.session())
 
 // routes.js
 app.get('/', (req, res) => {
