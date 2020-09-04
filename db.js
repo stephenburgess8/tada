@@ -13,11 +13,11 @@ const options = {
 }
 
 mongoose
-	.connect(db, options)
+	.connect(uri, options)
 	.then(() => {
 		console.log("MongoDB is connected")
 	})
-	catch((err) => {
+	.catch((err) => {
 		console.log("MongoDB connection unsuccessful")
 		console.log(err)
 	})

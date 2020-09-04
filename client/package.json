@@ -9,18 +9,26 @@
     "vue": "./node_modules/.bin/vue"
   },
   "dependencies": {
+    "@mdi/font": "^3.6.95",
+    "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "roboto-fontface": "*",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.2.11"
   },
   "devDependencies": {
     "@vue/cli": "^4.5.4",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.4",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "colorette": "^1.2.1",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
+    "material-design-icons-iconfont": "^6.0.2",
+    "vue-cli-plugin-vuetify": "~2.0.7",
     "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
