@@ -1,4 +1,5 @@
 import axios from "axios"
+import router from '../router'
 
 export default {
   async getTodos(userId, token) {
@@ -12,13 +13,14 @@ export default {
     return res.data
   },
   async getTodoSingle(userId, todoId, token) {
-    let res = await axios.get("http://localhost:4050/api/todos/" + todoId,
+    let res = await axios.get("http://localhost:4050/api/todo/" + todoId,
         {
         headers: {
             'Authorization': `Bearer ${token}`,
             'User': userId
         }
     })
+    console.log(res.data)
     return res.data
   },
   async newTodo(data, token) {
@@ -29,6 +31,17 @@ export default {
             'Content-Type': 'application/json'
         }
     })
-    return res.data
+    const path = "/todo/" + res.data.insertedId
+    router.push({path})
+  },
+  async markTodoDone(userId, todoId, token) {
+    await axios.delete("http://localhost:4050/api/todo/" + todoId, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'User': userId
+        }
+    })
+    const path = "/"
+    router.push({path})
   }
 }

@@ -6,7 +6,7 @@
     <v-col class="flex-grow-1">
      <v-container flex>
       <v-layout row>
-      <v-form class="full-width" method="post" action="http://127.0.0.1:3000/todos"> 
+      <v-form v-if="$auth.isAuthenticated" class="full-width" method="post" action="http://127.0.0.1:3000/todos"> 
         <v-text-field
           label="Title"
           full-width
@@ -112,5 +112,8 @@
   }
   .description {
     margin-bottom: 30px;
+  }
+  .v-date-picker-table .v-btn.v-btn--active {
+  color: black;
   }
 </style>

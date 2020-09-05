@@ -11,17 +11,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/todos',
-    name: 'TodosList',
-    component: () => import('../views/TodosList.vue')
-  },
-  {
     path: '/todo/add',
     name: 'todoAdd',
     component: () => import('../views/TodoAdd.vue')
   },
   {
-    path: '/todos/:id',
+    path: '/todo/:id',
     name: 'todoSingle',
     component: () => import('../views/TodoSingle.vue')
   }

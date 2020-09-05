@@ -20,6 +20,7 @@
             v-for="item in items"
             :key="item.title"
             link
+            :disabled="item.disabled ? true : false"
             :to="item.link"
           >
             <v-list-item-icon>
@@ -50,7 +51,7 @@
           {
             title: 'Todos',
             icon: 'mdi-format-list-bulleted-type',
-            link: '/todos'
+            link: '/'
           },
           {
             title: 'Calendar',

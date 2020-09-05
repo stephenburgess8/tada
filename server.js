@@ -9,7 +9,7 @@ dotenv.config()
 // auth.js
 const MongoClient = require('mongodb').MongoClient
 const uri = `mongodb+srv://${process.env.mongouser}:${process.env.mongopass}@${process.env.mongocluster}.amsqv.mongodb.net/?retryWrites=true&w=majority`
-
+const ObjectID = require('mongodb').ObjectID
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -48,10 +48,12 @@ app.get('/', jwtCheck, (req, res) => {
 })
 
 
-app.get('/api/todos/:id', jwtCheck, (req, res) => {
-    const id = Number(req.params.id);
-    const todos = todos.find(todo => todo.id === id);
-    res.send(todo);
+app.get('/api/todo/:id', jwtCheck, (req, res) => {
+    getTodo(req, res, req.params.id).catch(console.dir)
+});
+
+app.delete('/api/todo/:id', jwtCheck, (req, res) => {
+    deleteTodo(req, res, req.params.id).catch(console.dir)
 });
 
 app.get('/api/todos', jwtCheck,  async (req, res) => {
@@ -63,9 +65,34 @@ app.post('/api/todos', jwtCheck, async (req, res, next) => {
     addTodo(req, res).catch(console.dir)
 })
 
+async function deleteTodo(req, res, id) {
+    try {
+        await client.connect()
+        console.log("Connected to server")
+        const _id = new ObjectID(id)
+        const db = client.db("todos")
+        const col = db.collection('todoitems')
+        const response = await col.remove({user_id: req.headers.user, _id: _id})
+        res.send(response)
+    } finally {
+    }
+}
+
+async function getTodo(req, res, id) {
+    try {
+        await client.connect()
+        console.log("Connected to server")
+        const _id = new ObjectID(id)
+        const db = client.db("todos")
+        const col = db.collection('todoitems')
+        const response = await col.findOne({user_id: req.headers.user, _id: _id})
+        res.send(response)
+    } finally {
+    }
+}
+
 async function addTodo(req, res) {
     try {
-        console.log(req.body)
         const data = {
             ...req.body,
             user_id: req.headers.user
@@ -75,25 +102,21 @@ async function addTodo(req, res) {
         const db = client.db("todos")
         const col = db.collection('todoitems')
         const response = await col.insertOne(data)
-        res.send(response.data)
+        res.send(response)
     } finally {
-        await client.close()
     }
 }
 
 
 async function getTodos(req,res) {
     try {
-        console.log(req.headers.user)
         await client.connect()
         console.log("Connected to server")
         const db = client.db("todos")
         const col = db.collection('todoitems')
         const response = await col.find({user_id:req.headers.user}).toArray()
-        console.log(response)
         res.send(response)
     } finally {
-        await client.close()
     }
 }
 
