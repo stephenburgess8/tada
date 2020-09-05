@@ -6,14 +6,16 @@
     <v-col class="flex-grow-1">
      <v-container flex>
       <v-layout row>
-      <v-form class="full-width"> 
+      <v-form class="full-width" method="post" action="http://127.0.0.1:3000/todos"> 
         <v-text-field
           label="Title"
           full-width
           class="pt-0"
           name="title"
+          v-model="todo.title"
         ></v-text-field>
         <v-date-picker
+          v-model="todo.date"
           reactive
           full-width
           show-current
@@ -27,6 +29,7 @@
           landscape
           full-width
           name="time"
+          v-model="todo.time"
         ></v-time-picker>
         <v-textarea
           label="Details"
@@ -35,6 +38,7 @@
           full-width
           single-line
           name="details"
+          v-model="todo.details"
         ></v-textarea>
         <v-btn class="mr-4" @click="submit">Add Todo</v-btn>
       </v-form>
@@ -50,21 +54,27 @@
     data() {
       return {
         picker: new Date().toISOString().substr(0, 10),
- 
+        todo: {
+          title: '',
+          date: '',
+          time: '',
+          details: ''
+        }
       }
     },
     components: {
       Dashboard
     },
     methods: {
-      async submit() {
+      async submit(e) {
+        e.preventDefault();
 
         const token = await this.$auth.getTokenSilently();
-        const data = {
-          ...this.todo,
-          email: this.$auth.user.email
-        }
-        TodoService.newTodo(data, token)
+
+        TodoService.newTodo({
+            ...this.todo,
+            email: this.$auth.user.email
+          }, token)
         .then(
           (res => {
             console.log(res)

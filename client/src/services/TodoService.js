@@ -2,32 +2,33 @@ import axios from "axios"
 
 export default {
   async getTodos(userId, token) {
-    console.log(userId, token)
     let res = await axios.get("http://localhost:4050/api/todos", {
         headers: {
             'Authorization': `Bearer ${token}`,
-            // 'UserId': userId
+            'User': userId
         }
-    });
-    return res.data;
+    })
+    console.log(res.data)
+    return res.data
   },
   async getTodoSingle(userId, todoId, token) {
     let res = await axios.get("http://localhost:4050/api/todos/" + todoId,
         {
         headers: {
             'Authorization': `Bearer ${token}`,
-            // 'UserId': userId
+            'User': userId
         }
-    });
-    return res.data;
+    })
+    return res.data
   },
-  async newTodo(req, token) {
-    let res = await axios.post("http://localhost:4050/api/todos/", req, {
+  async newTodo(data, token) {
+    let res = await axios.post("http://localhost:4050/api/todos/", data, {
         headers: {
             'Authorization': `Bearer ${token}`,
-            // 'UserId': req.email
+            'User': data.email,
+            'Content-Type': 'application/json'
         }
-    });
-    return res.data;
+    })
+    return res.data
   }
 }

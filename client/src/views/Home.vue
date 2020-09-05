@@ -3,7 +3,6 @@
     <v-container>
       <v-row
         class="flex-column ma-0"
-        justify="left"
       >
         <About v-if="!$auth.isAuthenticated" />
         <v-col class="flex-shrink-1" cols="3">

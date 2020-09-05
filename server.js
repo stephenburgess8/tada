@@ -19,6 +19,7 @@ const app = express()
 app.use(morgan('tiny'))
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 //app.use(passport.session())
 
 const jwt = require("express-jwt")
@@ -54,37 +55,43 @@ app.get('/api/todos/:id', jwtCheck, (req, res) => {
 });
 
 app.get('/api/todos', jwtCheck,  async (req, res) => {
-    getTodos(req).catch(console.dir)
+    getTodos(req, res).catch(console.dir)
     
 });
 
 app.post('/api/todos', jwtCheck, async (req, res, next) => { 
-    console.log(req) 
-    addTodo(req).catch(console.dir)
+    addTodo(req, res).catch(console.dir)
 })
 
-async function addTodo(req) {
+async function addTodo(req, res) {
     try {
+        console.log(req.body)
+        const data = {
+            ...req.body,
+            user_id: req.headers.user
+        }
         await client.connect()
         console.log("Connected to server")
         const db = client.db("todos")
         const col = db.collection('todoitems')
-        const response = await col.insertOne(req.body)
-        console.log(response)
+        const response = await col.insertOne(data)
+        res.send(response.data)
     } finally {
         await client.close()
     }
 }
 
 
-async function getTodos(req) {
+async function getTodos(req,res) {
     try {
+        console.log(req.headers.user)
         await client.connect()
         console.log("Connected to server")
         const db = client.db("todos")
         const col = db.collection('todoitems')
-        const response = await col.find()
+        const response = await col.find({user_id:req.headers.user}).toArray()
         console.log(response)
+        res.send(response)
     } finally {
         await client.close()
     }
