@@ -4,7 +4,7 @@
       <v-row
         class="flex-column ma-0"
       >
-        <About v-if="!$auth.isAuthenticated" />
+        <About v-if="!$auth.isAuthenticated && !$auth.loading" />
         <v-col class="flex-grow-1">
           <TodosList v-if="$auth.isAuthenticated" />
         </v-col>
