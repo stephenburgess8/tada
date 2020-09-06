@@ -1,4 +1,10 @@
 <template>
+
+  <div class="home">
+    <v-container>
+      <v-row class="flex-column ma-0">
+
+        <v-col class="flex-grow-1">
   <v-row class="text-center">
     <v-col class="flex-shrink-1" cols="3">
       <Dashboard v-if="$auth.isAuthenticated" />
@@ -46,6 +52,11 @@
       </v-container>
     </v-col>
   </v-row>
+          </v-col>
+      </v-row>
+
+    </v-container>
+  </div>
 </template>
 <script>
   import Dashboard from '../components/Dashboard'

@@ -6,7 +6,11 @@
     <v-col class="flex-grow-1">
       <v-container flex>
         <v-layout row>
-
+          <div v-if="!todos.length" class="text-center">
+          <v-btn class="tada-link"
+              to="/todo/add">Add your first Todo
+          </v-btn>
+          </div>
           <v-col cols="auto"
             v-for="todo in todos" 
             :todo="todo"
