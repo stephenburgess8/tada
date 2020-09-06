@@ -20,6 +20,7 @@ app.use(morgan('tiny'))
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(express.static('client/dist'))
 //app.use(passport.session())
 
 const jwt = require("express-jwt")
@@ -38,13 +39,8 @@ const jwtCheck = jwt({
 
 
 // routes.js
-app.get('/', jwtCheck, (req, res) => {
-    console.log('fs')
-    // passport.authenticate('basic', { session: false }),
-    // function(req, res) {
-    //     res.json({ username: req.user.username, email: req.user.emails[0].value })
-    // })
-    res.sendFile(__dirname + '/client/public/index.html')
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/client/dist/index.html')
 })
 
 

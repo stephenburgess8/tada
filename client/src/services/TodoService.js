@@ -9,7 +9,6 @@ export default {
             'User': userId
         }
     })
-    console.log(res.data)
     return res.data
   },
   async getTodoSingle(userId, todoId, token) {
@@ -20,7 +19,6 @@ export default {
             'User': userId
         }
     })
-    console.log(res.data)
     return res.data
   },
   async newTodo(data, token) {

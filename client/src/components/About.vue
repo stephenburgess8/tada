@@ -8,7 +8,7 @@
           <v-row>
             <v-col md="8" sm="8" cols="12">
               <p>Do you need to get stuff done, and fast? Do you want a Todo list app that's simple, easy to use, and free? Leave the frills, the complications, and the price tags of those other Todo list apps behind and try Tada today! With Tada, your work gets done like magic.</p> <br>
-              <p>Tada is a Todo List app prototype built on a modern JavaScript stack. The Tada List stack includes Vue, Vuetify, Material Design, Auth0, Node, Express, MongoDB, MongoDB Atlas, and Mongoose.</p>
+              <p>Tada is a Todo List app prototype built on a modern JavaScript stack. The Tada List stack includes Vue, Vuetify, Material Design, Auth0, Node, Express, MongoDB, and MongoDB Atlas.</p>
             </v-col>
 
             <v-col
