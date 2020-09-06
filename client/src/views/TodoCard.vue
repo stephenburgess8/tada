@@ -17,12 +17,24 @@
           <p>{{ todo.details }}</p>
         </v-col>
       </v-row>
+      <v-row><v-btn class="mr-4" @click="complete">Mark Done</v-btn>
+                      </v-row>
     </v-container>
   </v-card>
 </template>
 <script>
+  import TodoService from '@/services/TodoService.js'
+
   export default {
     props: ['todo'],
+    methods: {
+      async complete(e) {
+        e.preventDefault();
+
+        const token = await this.$auth.getTokenSilently();
+        TodoService.markTodoDone(this.$auth.user.email, this.$props.todo._id, token)
+      }
+    }
   }
 </script>
 <style scoped>
