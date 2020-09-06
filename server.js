@@ -32,7 +32,7 @@ const jwtCheck = jwt({
           jwksRequestsPerMinute: 5,
           jwksUri: 'https://dev-jgoxkuks.us.auth0.com/.well-known/jwks.json'
     }),
-    audience: 'localhost:8080',
+    audience: 'localhost',
     issuer: 'https://dev-jgoxkuks.us.auth0.com/',
     algorithms: ['RS256']
 })

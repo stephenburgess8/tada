@@ -4,9 +4,9 @@ import vuetify from './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 
-const domain = process.env.VUE_APP_DOMAIN
-const clientId = process.env.VUE_APP_AUTHCLIENTID
-const audience = process.env.VUE_APP_AUDIENCE
+const domain = 'dev-jgoxkuks.us.auth0.com'
+const clientId = 'l0G54X6WA3sXqP1r8KMazAQbYKE8pa7f'
+const audience = 'https://infallible-leakey-5468ab.netlify.app/'
 
 import router from './router'
 import { Auth0Plugin } from "./auth"
