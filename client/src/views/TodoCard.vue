@@ -17,8 +17,10 @@
           <p>{{ todo.details }}</p>
         </v-col>
       </v-row>
-      <v-row><v-btn class="mr-4" @click="complete">Mark Done</v-btn>
-                      </v-row>
+      <v-row>
+    <v-container><v-btn class="mr-4" @click="complete">Mark Done</v-btn>
+                      
+    </v-container></v-row>
     </v-container>
   </v-card>
 </template>
@@ -32,7 +34,7 @@
         e.preventDefault();
 
         const token = await this.$auth.getTokenSilently();
-        TodoService.markTodoDone(this.$auth.user.email, this.$props.todo._id, token)
+        TodoService.markTodoDone(this.$auth.user.email, this.$props.todo._id, token, true)
       }
     }
   }

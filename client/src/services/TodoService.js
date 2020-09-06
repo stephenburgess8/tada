@@ -32,14 +32,17 @@ export default {
     const path = "/todo/" + res.data.insertedId
     router.push({path})
   },
-  async markTodoDone(userId, todoId, token) {
+  async markTodoDone(userId, todoId, token, singleView = true) {
     await axios.delete("/api/todo/" + todoId, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'User': userId
         }
     })
-    const path = "/"
-    router.push({path})
+    if (singleView) {
+        const path = "/"
+        router.push({path})
+    }
+    router.go()
   }
 }
