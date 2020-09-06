@@ -64,4 +64,11 @@
 .tada-link {
   text-decoration: none;
 }
+.home .row .row .flex-grow-1 .container.flex {
+  padding-top: 0;
+}
+
+.home .row .row .flex-grow-1 .container .column.col {
+  padding-top: 0;
+}
 </style>
