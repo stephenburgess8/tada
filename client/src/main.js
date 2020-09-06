@@ -5,8 +5,8 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 const domain = 'dev-jgoxkuks.us.auth0.com'
-const clientId = 'l0G54X6WA3sXqP1r8KMazAQbYKE8pa7f'
-const audience = 'https://infallible-leakey-5468ab.netlify.app/'
+const clientId = 'WvKhu0TqII8yQC2Mtw288UXv36HLPuDf'
+const audience = 'https://tada-prototype.herokuapp.com/'
 
 import router from './router'
 import { Auth0Plugin } from "./auth"

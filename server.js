@@ -21,7 +21,6 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('client/dist'))
-//app.use(passport.session())
 
 const jwt = require("express-jwt")
 const jwksRsa = require("jwks-rsa")
@@ -32,7 +31,7 @@ const jwtCheck = jwt({
           jwksRequestsPerMinute: 5,
           jwksUri: 'https://dev-jgoxkuks.us.auth0.com/.well-known/jwks.json'
     }),
-    audience: 'localhost',
+    audience: 'https://tada-prototype.herokuapp.com/',
     issuer: 'https://dev-jgoxkuks.us.auth0.com/',
     algorithms: ['RS256']
 })
@@ -42,7 +41,6 @@ const jwtCheck = jwt({
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/client/dist/index.html')
 })
-
 
 app.get('/api/todo/:id', jwtCheck, (req, res) => {
     getTodo(req, res, req.params.id).catch(console.dir)
