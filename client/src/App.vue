@@ -7,7 +7,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <!-- Check that the SDK client is not currently loading before accessing is methods -->
-            <div v-if="!$auth.loading">
+            <div>
               <!-- show login when not authenticated -->
               <a v-if="!$auth.isAuthenticated" @click="login" class="button is-dark"><strong>Sign in / Register</strong></a>
               <!-- show logout when authenticated -->
