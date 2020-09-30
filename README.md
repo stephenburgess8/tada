@@ -1,6 +1,7 @@
 # Tada List
 
 Tada List is a simple Todo List made with Node, Express, MongoDB, and Vue.
+https://tada-prototype.herokuapp.com/
 
 ## How to run
 1. Install Node and npm
